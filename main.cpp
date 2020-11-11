@@ -1,6 +1,6 @@
 #include <iostream>
 int main(int argc, char const *argv[])
 {
-    std::cout << "FuckU!!!!" << std::endl;
+    std::cout << "hhhhhh" << std::endl;
     return 0;
 }
