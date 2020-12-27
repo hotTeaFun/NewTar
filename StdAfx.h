@@ -1,14 +1,14 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
 
-//×î¶à´ò°üÎÄ¼ş¸öÊı
+//æœ€å¤šæ‰“åŒ…æ–‡ä»¶ä¸ªæ•°
 #define MAX_FILE_COUNT  1024
-//×î´óÂ·¾¶×Ö·û³¤¶È
+//æœ€å¤§è·¯å¾„å­—ç¬¦é•¿åº¦
 #define MAX_PATH   260
-//ÎÄ¼şÍ·
+//æ–‡ä»¶å¤´
 struct FileHead
 {
-	unsigned int FileCount;//ÎÄ¼ş¸öÊı
-	unsigned int FileLen[MAX_FILE_COUNT];//ÎÄ¼ş´óĞ¡
-	char FileName[MAX_FILE_COUNT][MAX_PATH];//ÎÄ¼şÃû
+	unsigned int FileCount;//æ–‡ä»¶ä¸ªæ•°
+	unsigned int FileLen[MAX_FILE_COUNT];//æ–‡ä»¶å¤§å°
+	char FileName[MAX_FILE_COUNT][MAX_PATH];//æ–‡ä»¶å
 };

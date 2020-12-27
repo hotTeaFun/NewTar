@@ -22,9 +22,9 @@ using namespace std;
 class Pack_file
 {
 private:
-	FileHead fh;//ÎÄ¼şÍ·
-	char ObjectFilePathName[MAX_PATH];//Éú³É´ò°üÎÄ¼şÎ»ÖÃ¼°Ãû³Æ
-	char ObjectFilefoldPath[MAX_PATH];//ĞèÒª´ò°üµÄÎÄ¼ş¼ĞÎ»ÖÃ
+	FileHead fh;//æ–‡ä»¶å¤´
+	char ObjectFilePathName[MAX_PATH];//ç”Ÿæˆæ‰“åŒ…æ–‡ä»¶ä½ç½®åŠåç§°
+	char ObjectFilefoldPath[MAX_PATH];//éœ€è¦æ‰“åŒ…çš„æ–‡ä»¶å¤¹ä½ç½®
 
 	vector<string> filelist; //
 
@@ -35,26 +35,26 @@ public:
 	~Pack_file(void);
 
 
-	//Ìí¼ÓÎÄ¼şµ½°üÄÚ
+	//æ·»åŠ æ–‡ä»¶åˆ°åŒ…å†…
 	void AddFile();
-	//ÉèÖÃ´ò°üÂ·¾¶
+	//è®¾ç½®æ‰“åŒ…è·¯å¾„
 	void SetfilePath(char * filePutPath);
-	//ÉèÖÃ´ò°üÊä³öÎÄ¼ş
+	//è®¾ç½®æ‰“åŒ…è¾“å‡ºæ–‡ä»¶
 	void SetOutPutFile(char * OutFile);
-	//»ñÈ¡ÎÄ¼ş´óĞ¡(´«ÈëÒÔ¶ş½øÖÆ·½Ê½´ò¿ªµÄÎÄ¼şÖ¸Õë)
+	//è·å–æ–‡ä»¶å¤§å°(ä¼ å…¥ä»¥äºŒè¿›åˆ¶æ–¹å¼æ‰“å¼€çš„æ–‡ä»¶æŒ‡é’ˆ)
 	long GetFileSize(FILE *pf);
-	//ÖÆ×÷´ò°üÎÄ¼ş
+	//åˆ¶ä½œæ‰“åŒ…æ–‡ä»¶
 	void DoMakeCAB();
-	//½â°ü(ÎªÁË½ÚÊ¡Ê±¼ä²»Ğ´´íÎó´¦ÀíÁË,¿ÉÒÔ¸ù¾İÉÏÃæ×Ô¼ºÌí¼Ó)
+	//è§£åŒ…(ä¸ºäº†èŠ‚çœæ—¶é—´ä¸å†™é”™è¯¯å¤„ç†äº†,å¯ä»¥æ ¹æ®ä¸Šé¢è‡ªå·±æ·»åŠ )
 	//void DoUnCAB(char *CabFilePathName);
-	//µÃµ½ĞèÒª½â°üµÄÎÄ¼ş
+	//å¾—åˆ°éœ€è¦è§£åŒ…çš„æ–‡ä»¶
 	void get_filelist(char *foldname);
 	//void ReadFile(const char* fileName);
 	//void WriteFile(string fileName);
 
 private:
-	//ÏÔÊ¾´ò°üÄÚÎÄ¼şĞÅÏ¢
+	//æ˜¾ç¤ºæ‰“åŒ…å†…æ–‡ä»¶ä¿¡æ¯
 	void printCAB();
-	//´´½¨ÎÄ¼ş¼Ğ
+	//åˆ›å»ºæ–‡ä»¶å¤¹
 	void CheckTargetPath(string targetPath);
 };

@@ -1,4 +1,4 @@
-// PacketFile.cpp : ¶¨Òå¿ØÖÆÌ¨Ó¦ÓÃ³ÌÐòµÄÈë¿Úµã¡£
+// PacketFile.cpp : å®šä¹‰æŽ§åˆ¶å°åº”ç”¨ç¨‹åºçš„å…¥å£ç‚¹ã€‚
 
 
 #include "stdafx.h"
@@ -20,26 +20,26 @@ int main()
 
 
 
-	//--------------------´ò°ü¹ý³Ì--------------------
-	//ÉùÃ÷¶ÔÏó
+	//--------------------æ‰“åŒ…è¿‡ç¨‹--------------------
+	//å£°æ˜Žå¯¹è±¡
 	Pack_file mc;
-	//ÉèÖÃÊä³öÎÄ¼þ
+	//è®¾ç½®è¾“å‡ºæ–‡ä»¶
 	mc.SetOutPutFile(filePutPath);
-	//ÉèÖÃ´ò°üÂ·¾¶
+	//è®¾ç½®æ‰“åŒ…è·¯å¾„
 	mc.SetfilePath(filePacketPath);
-	//»ñµÃÐèÒª´ò°üµÄÎÄ¼þ
+	//èŽ·å¾—éœ€è¦æ‰“åŒ…çš„æ–‡ä»¶
 	mc.get_filelist(filePacketPath);
-	//Ìí¼Ó´ò°üÎÄ¼þ
+	//æ·»åŠ æ‰“åŒ…æ–‡ä»¶
 	mc.AddFile();
-	//Ö´ÐÐ´ò°ü
+	//æ‰§è¡Œæ‰“åŒ…
 	mc.DoMakeCAB();
 
 
-	//--------------------½â¹ý³Ì--------------------
-	//ÉùÃ÷¶ÔÏó
+	//--------------------è§£è¿‡ç¨‹--------------------
+	//å£°æ˜Žå¯¹è±¡
 	UnPack_file umc;
-	//ÉèÖÃ½â°üÂ·¾¶
-	//Ö´ÐÐ½â°ü
+	//è®¾ç½®è§£åŒ…è·¯å¾„
+	//æ‰§è¡Œè§£åŒ…
 	umc.DoUnCAB(filePutPath, OutputPath);
 
 

@@ -20,9 +20,9 @@ using namespace std;
 class UnPack_file
 {
 private:
-	FileHead fh;//ÎÄ¼şÍ·
-	char ObjectFilePathName[MAX_PATH];//Éú³É´ò°üÎÄ¼şÎ»ÖÃ¼°Ãû³Æ
-	//char OutputPath[MAX_PATH]; //½âÑ¹ºóÎÄ¼şÊä³öÎ»ÖÃ
+	FileHead fh;//æ–‡ä»¶å¤´
+	char ObjectFilePathName[MAX_PATH];//ç”Ÿæˆæ‰“åŒ…æ–‡ä»¶ä½ç½®åŠåç§°
+	//char OutputPath[MAX_PATH]; //è§£å‹åæ–‡ä»¶è¾“å‡ºä½ç½®
 
 
 public:
@@ -33,8 +33,8 @@ public:
 
 
 private:
-	//ÏÔÊ¾´ò°üÄÚÎÄ¼şĞÅÏ¢
+	//æ˜¾ç¤ºæ‰“åŒ…å†…æ–‡ä»¶ä¿¡æ¯
 	void printCAB();
-	//´´½¨ÎÄ¼ş¼Ğ
+	//åˆ›å»ºæ–‡ä»¶å¤¹
 	void CheckTargetPath(string targetPath);
 };
