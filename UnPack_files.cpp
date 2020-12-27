@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+ï»¿#include "StdAfx.h"
 #include "UnPack_files.h"
 
 
@@ -8,15 +8,12 @@ UnPack_file::UnPack_file(void)
 	memset(ObjectFilePathName, 0x0, sizeof(ObjectFilePathName));
 }
 
-
 UnPack_file::~UnPack_file(void)
 {
 }
 
 
-
-
-//½â°ü(ÎªÁË½ÚÊ¡Ê±¼ä²»Ğ´´íÎó´¦ÀíÁË,¿ÉÒÔ¸ù¾İÉÏÃæ×Ô¼ºÌí¼Ó)
+//è§£åŒ…(ä¸ºäº†èŠ‚çœæ—¶é—´ä¸å†™é”™è¯¯å¤„ç†äº†,å¯ä»¥æ ¹æ®ä¸Šé¢è‡ªå·±æ·»åŠ )
 void UnPack_file::DoUnCAB(char *CabFilePathName, char*OutputPath)
 {
 	FILE *pCAB = NULL;
@@ -28,7 +25,7 @@ void UnPack_file::DoUnCAB(char *CabFilePathName, char*OutputPath)
 	pCAB = fopen(CabFilePathName, "rb");
 
 
-	//¶ÁÎÄ¼şÍ·
+	//è¯»æ–‡ä»¶å¤´
 	fseek(pCAB, -off, SEEK_END);
 	memset(&fh, 0x0, sizeof(fh));
 	fread(&fh, sizeof(fh), 1, pCAB);
@@ -37,16 +34,16 @@ void UnPack_file::DoUnCAB(char *CabFilePathName, char*OutputPath)
 	//printCAB();
 
 
-	//½â°üµÄËùÓĞÎÄ¼ş·Åµ½µ±Ç°Ä¿Â¼ÏÂ
+	//è§£åŒ…çš„æ‰€æœ‰æ–‡ä»¶æ”¾åˆ°å½“å‰ç›®å½•ä¸‹
 	for (int i = 0; i < fh.FileCount; i++)
 	{
 		unsigned char *pTmpData = NULL;
 		pTmpData = new unsigned char[fh.FileLen[i]];
 		fread(pTmpData, fh.FileLen[i], 1, pCAB);
-		//Ö»È¡ÎÄ¼şÃû,²»ÒªÉú³ÉÎÄ¼şµÄÂ·¾¶Ãû
+		//åªå–æ–‡ä»¶å,ä¸è¦ç”Ÿæˆæ–‡ä»¶çš„è·¯å¾„å
 		char tmpFileName[MAX_PATH];
 		string aaa;
-		cout << "fh.FileName: " << fh.FileName[i] << endl; //²âÊÔ
+		cout << "fh.FileName: " << fh.FileName[i] << endl; //æµ‹è¯•
 		aaa.assign(fh.FileName[i], strlen(fh.FileName[i]));
 		char ptmpC[MAX_PATH];
 		strcpy(ptmpC, aaa.c_str());
@@ -55,7 +52,7 @@ void UnPack_file::DoUnCAB(char *CabFilePathName, char*OutputPath)
 		memset(tmpFileName, 0x0, sizeof(tmpFileName));
 		strcpy(tmpFileName, ptmpC);
 		cout << "tmpFileName: " << tmpFileName << endl;
-		//È¡CABÎÄ¼şÂ·¾¶
+		//å–CABæ–‡ä»¶è·¯å¾„
 		char tmpPathName[MAX_PATH];
 		memset(tmpPathName, 0x0, sizeof(tmpPathName));
 		strcpy(tmpPathName, OutputPath);
@@ -81,24 +78,23 @@ void UnPack_file::DoUnCAB(char *CabFilePathName, char*OutputPath)
 		delete[] pTmpData;
 	}
 
-
 	fclose(pCAB);
 }
 
 
-//ÏÔÊ¾´ò°üÄÚÎÄ¼şĞÅÏ¢
+//æ˜¾ç¤ºæ‰“åŒ…å†…æ–‡ä»¶ä¿¡æ¯
 void UnPack_file::printCAB()
 {
-	cout << "ÎÄ¼şÄÚĞÅÏ¢ÈçÏÂ:" << endl;
-	cout << "ÎÄ¼ş×ÜÊı:" << fh.FileCount << endl;
+	cout << "æ–‡ä»¶å†…ä¿¡æ¯å¦‚ä¸‹:" << endl;
+	cout << "æ–‡ä»¶æ€»æ•°:" << fh.FileCount << endl;
 	for (int i = 0; i < fh.FileCount; i++)
 	{
-		cout << fh.FileName[i] << "\t\t\t\t" << fh.FileLen[i] << "×Ö½Ú" << endl;
+		cout << fh.FileName[i] << "\t\t\t\t" << fh.FileLen[i] << "å­—èŠ‚" << endl;
 	}
 }
 
 
-//´´½¨ÎÄ¼ş¼Ğ
+//åˆ›å»ºæ–‡ä»¶å¤¹
 void UnPack_file::CheckTargetPath(string targetPath)
 {
 	//Log &log = Log::getLog("main", "CheckTargetPath");

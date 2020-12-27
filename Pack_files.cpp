@@ -1,4 +1,4 @@
-
+ï»¿
 #include "StdAfx.h"
 #include "Pack_files.h"
 
@@ -19,7 +19,7 @@ void Pack_file:: SetfilePath(char * filePutPath)
 }
 
 
-//±éÀúÎÄ¼ş¼ĞÏÂµÄÎÄ¼şÃûÁĞ±í(°üÀ¨Ç¶Ì×ÎÄ¼ş¼Ğ)
+//éå†æ–‡ä»¶å¤¹ä¸‹çš„æ–‡ä»¶ååˆ—è¡¨(åŒ…æ‹¬åµŒå¥—æ–‡ä»¶å¤¹)
 void Pack_file::get_filelist(char *foldname)
 {
 	HANDLE hFind;
@@ -31,16 +31,16 @@ void Pack_file::get_filelist(char *foldname)
 	
 
 
-	//ĞèÒª¶ÔÎÄ¼ş¼ĞÃûµÄ×Ö·û´®½øĞĞ´¦Àí
+	//éœ€è¦å¯¹æ–‡ä»¶å¤¹åçš„å­—ç¬¦ä¸²è¿›è¡Œå¤„ç†
 	if (fn[strlen(fn) - 1] != '\\')
 	{
 		strcat_s(fn, "\\");
 	}
 
 
-	//ÁôÒâË³Ğò£¬´ËÊ±fnÒÑ¼ÓÈë"\\"
+	//ç•™æ„é¡ºåºï¼Œæ­¤æ—¶fnå·²åŠ å…¥"\\"
 	strcpy(tmpfn, fn);
-	//²»¼Ó*»á³ö´í£¡
+	//ä¸åŠ *ä¼šå‡ºé”™ï¼
 	strcat_s(fn, "*");
 
 
@@ -48,7 +48,7 @@ void Pack_file::get_filelist(char *foldname)
 	FindNextFile(hFind, &fileData);
 	while (FindNextFile(hFind, &fileData))
 	{
-		//Èç¹ûÉ¨Ãèµ½µÄµ±Ç°ÎªÎÄ¼ş¼Ğ
+		//å¦‚æœæ‰«æåˆ°çš„å½“å‰ä¸ºæ–‡ä»¶å¤¹
 		if (fileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 		{
 			if (fileData.cFileName[0] != '.')
@@ -59,7 +59,7 @@ void Pack_file::get_filelist(char *foldname)
 				get_filelist(szFile);
 			}
 		}
-		//É¨Ãèµ½ÎÄ¼ş
+		//æ‰«æåˆ°æ–‡ä»¶
 		else
 		{
 			line = (string)tmpfn;
@@ -79,17 +79,17 @@ void Pack_file::get_filelist(char *foldname)
 }
 
 
-//Ìí¼ÓÎÄ¼şµ½°üÄÚ
+//æ·»åŠ æ–‡ä»¶åˆ°åŒ…å†…
 void Pack_file::AddFile()
 {	
 	vector<string>::iterator itemFileName;
-	//Ìí¼ÓÒª´ò°üµÄÎÄ¼ş
+	//æ·»åŠ è¦æ‰“åŒ…çš„æ–‡ä»¶
 	for (itemFileName = filelist.begin(); itemFileName < filelist.end(); itemFileName++)
 	{
 
 		if (fh.FileCount >= MAX_FILE_COUNT - 1)
 		{
-			cout << "×î¶àÖ§³Ö" << MAX_FILE_COUNT << "¸öÎÄ¼ş" << endl;
+			cout << "æœ€å¤šæ”¯æŒ" << MAX_FILE_COUNT << "ä¸ªæ–‡ä»¶" << endl;
 			return;
 		}
 		strcpy_s(fh.FileName[fh.FileCount], (*itemFileName).c_str());
@@ -99,7 +99,7 @@ void Pack_file::AddFile()
 }
 
 
-//ÉèÖÃ´ò°üÊä³öÎÄ¼ş
+//è®¾ç½®æ‰“åŒ…è¾“å‡ºæ–‡ä»¶
 void Pack_file::SetOutPutFile(char * OutFile)
 {
 	memset(ObjectFilePathName, 0x0, sizeof(ObjectFilePathName));
@@ -107,26 +107,26 @@ void Pack_file::SetOutPutFile(char * OutFile)
 }
 
 
-//»ñÈ¡ÎÄ¼ş´óĞ¡(´«ÈëÒÔ¶ş½øÖÆ·½Ê½´ò¿ªµÄÎÄ¼şÖ¸Õë)
+//è·å–æ–‡ä»¶å¤§å°(ä¼ å…¥ä»¥äºŒè¿›åˆ¶æ–¹å¼æ‰“å¼€çš„æ–‡ä»¶æŒ‡é’ˆ)
 long Pack_file::GetFileSize(FILE *pf)
 {
-	//Ö¸ÕëÒÆµ½ÎÄ¼şÎ²
+	//æŒ‡é’ˆç§»åˆ°æ–‡ä»¶å°¾
 	fseek(pf, 0,/*SEEK_END*/ 2);
 	return ftell(pf);
 }
 
 
-//ÖÆ×÷´ò°üÎÄ¼ş
+//åˆ¶ä½œæ‰“åŒ…æ–‡ä»¶
 void Pack_file::DoMakeCAB()
 {
 	if (fh.FileCount < 1)
 	{
-		cout << "Ã»ÓĞÎÄ¼şÌí¼Óµ½´ò°ü" << endl;
+		cout << "æ²¡æœ‰æ–‡ä»¶æ·»åŠ åˆ°æ‰“åŒ…" << endl;
 		return;
 	}
 	if (strlen(ObjectFilePathName) < 1)
 	{
-		cout << "Ã»ÓĞÖ¸¶¨´ò°üÎÄ¼şÊä³öÎ»ÖÃ" << endl;
+		cout << "æ²¡æœ‰æŒ‡å®šæ‰“åŒ…æ–‡ä»¶è¾“å‡ºä½ç½®" << endl;
 		return;
 	}
 
@@ -135,13 +135,13 @@ void Pack_file::DoMakeCAB()
 	FILE *pWorkFile = NULL;
 
 
-	//»ñÈ¡ËùÓĞÎÄ¼ş´óĞ¡
+	//è·å–æ‰€æœ‰æ–‡ä»¶å¤§å°
 	for (int i = 0; i < fh.FileCount; i++)
 	{
 		pWorkFile = fopen(fh.FileName[i], "rb");
 		if (NULL == pWorkFile)
 		{
-			cout << "ÎÄ¼ş:" << fh.FileName[i] << "ÎŞ·¨¶ÁÈ¡[" << strerror(errno) << "]" << endl;
+			cout << "æ–‡ä»¶:" << fh.FileName[i] << "æ— æ³•è¯»å–[" << strerror(errno) << "]" << endl;
 			return;
 		}
 		fh.FileLen[i] = GetFileSize(pWorkFile);
@@ -149,18 +149,18 @@ void Pack_file::DoMakeCAB()
 	}
 
 
-	//¼ì²éÊÇ·ñÓĞ¶ÔÓ¦µÄÎÄ¼ş¼Ğ
+	//æ£€æŸ¥æ˜¯å¦æœ‰å¯¹åº”çš„æ–‡ä»¶å¤¹
 	CheckTargetPath(ObjectFilePathName);
-	//¿ªÊ¼ºÏ²¢Ğ´ÎÄ¼ş
+	//å¼€å§‹åˆå¹¶å†™æ–‡ä»¶
 	pOutFile = fopen(ObjectFilePathName, "wb");
 	if (NULL == pOutFile)
 	{
-		cout << "Êä³öÎÄ¼ş´´½¨Ê§°Ü[" << strerror(errno) << "]" << endl;
+		cout << "è¾“å‡ºæ–‡ä»¶åˆ›å»ºå¤±è´¥[" << strerror(errno) << "]" << endl;
 		return;
 	}
 
 	
-	//Ğ´Èë¸÷ÎÄ¼ş
+	//å†™å…¥å„æ–‡ä»¶
 	for (int i = 0; i < fh.FileCount; i++)
 	{
 		unsigned char *pTmpData = NULL;
@@ -168,7 +168,7 @@ void Pack_file::DoMakeCAB()
 		pWorkFile = fopen(fh.FileName[i], "rb");
 		if (NULL == pWorkFile)
 		{
-			cout << "ÎÄ¼ş:" << fh.FileName[i] << "ÎŞ·¨¶ÁÈ¡[" << strerror(errno) << "]" << endl;
+			cout << "æ–‡ä»¶:" << fh.FileName[i] << "æ— æ³•è¯»å–[" << strerror(errno) << "]" << endl;
 			fclose(pWorkFile);
 			fclose(pOutFile);
 			return;
@@ -177,7 +177,7 @@ void Pack_file::DoMakeCAB()
 		fread(pTmpData, fh.FileLen[i], 1, pWorkFile);
 		if (ferror(pWorkFile))
 		{
-			cout << "ÎÄ¼ş:" << fh.FileName[i] << "ÎŞ·¨¶ÁÈ¡[" << strerror(errno) << "]" << endl;
+			cout << "æ–‡ä»¶:" << fh.FileName[i] << "æ— æ³•è¯»å–[" << strerror(errno) << "]" << endl;
 			fclose(pWorkFile);
 			fclose(pOutFile);
 			return;
@@ -185,7 +185,7 @@ void Pack_file::DoMakeCAB()
 		fwrite(pTmpData, fh.FileLen[i], 1, pOutFile);
 		if (ferror(pOutFile))
 		{
-			cout << "ÎÄ¼ş:" << ObjectFilePathName << "ÎŞ·¨Ğ´Èë[" << strerror(errno) << "]" << endl;
+			cout << "æ–‡ä»¶:" << ObjectFilePathName << "æ— æ³•å†™å…¥[" << strerror(errno) << "]" << endl;
 			fclose(pWorkFile);
 			fclose(pOutFile);
 			return;
@@ -205,7 +205,7 @@ void Pack_file::DoMakeCAB()
 	{
 		cout << "fh.FileName modify: " << fh.FileName[i] << endl;
 	}
-	//Ğ´ÈëÎÄ¼şÍ·
+	//å†™å…¥æ–‡ä»¶å¤´
 
 	fwrite(&fh, sizeof(fh), 1, pOutFile);
 
@@ -214,25 +214,25 @@ void Pack_file::DoMakeCAB()
 	
 
 	fclose(pOutFile);
-	cout << "´ò°üÍê³É" << endl;
+	cout << "æ‰“åŒ…å®Œæˆ" << endl;
 }
 
 
 
 
-//ÏÔÊ¾´ò°üÄÚÎÄ¼şĞÅÏ¢
+//æ˜¾ç¤ºæ‰“åŒ…å†…æ–‡ä»¶ä¿¡æ¯
 void Pack_file::printCAB()
 {
-	cout << "ÎÄ¼şÄÚĞÅÏ¢ÈçÏÂ:" << endl;
-	cout << "ÎÄ¼ş×ÜÊı:" << fh.FileCount << endl;
+	cout << "æ–‡ä»¶å†…ä¿¡æ¯å¦‚ä¸‹:" << endl;
+	cout << "æ–‡ä»¶æ€»æ•°:" << fh.FileCount << endl;
 	for (int i = 0; i < fh.FileCount; i++)
 	{
-		cout << fh.FileName[i] << "\t\t\t\t" << fh.FileLen[i] << "×Ö½Ú" << endl;
+		cout << fh.FileName[i] << "\t\t\t\t" << fh.FileLen[i] << "å­—èŠ‚" << endl;
 	}
 }
 
 
-//´´½¨ÎÄ¼ş¼Ğ
+//åˆ›å»ºæ–‡ä»¶å¤¹
 void Pack_file::CheckTargetPath(string targetPath)
 {
 	//Log &log = Log::getLog("main", "CheckTargetPath");
